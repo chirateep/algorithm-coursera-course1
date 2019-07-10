@@ -62,6 +62,7 @@ def fibonacci_sum_fast(n):
 
     return digit
 
+
 if __name__ == '__main__':
     input = sys.stdin.read()
     n = int(input)

@@ -40,6 +40,7 @@ def get_fibonacci_huge_fast(n, m):
     index = n % counter
     return mod_fib[index]
 
+
 if __name__ == '__main__':
     input = sys.stdin.read()
     n, m = map(int, input.split())

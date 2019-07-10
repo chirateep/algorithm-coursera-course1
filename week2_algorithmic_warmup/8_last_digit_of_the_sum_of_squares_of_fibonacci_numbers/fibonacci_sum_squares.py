@@ -62,6 +62,7 @@ def fibonacci_sum_squares_fast(n):
 
     return digit
 
+
 if __name__ == '__main__':
     n = int(stdin.read())
     # print(fibonacci_sum_squares_naive(n))
