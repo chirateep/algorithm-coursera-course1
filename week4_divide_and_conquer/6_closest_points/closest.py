@@ -28,7 +28,8 @@ def fast_minimum_distance(x, y):
     left = 0
     right = len(pair_sort_x) - 1
 
-    min_distance = recursive_minimum_distance(pair_sort_x, pair_sort_y, left, right)
+    min_distance = recursive_minimum_distance(pair_sort_x, pair_sort_y,
+                                              left, right)
     return min_distance
 
 
@@ -39,8 +40,10 @@ def recursive_minimum_distance(pair_sort_x, pair_sort_y, left, right):
     if left + 1 == right:
         return distance(pair_sort_x[left], pair_sort_x[right])
     mid = (left + right) // 2
-    min_distance_left = recursive_minimum_distance(pair_sort_x, pair_sort_y, left, mid)
-    min_distance_right = recursive_minimum_distance(pair_sort_x, pair_sort_y, mid, right)
+    min_distance_left = recursive_minimum_distance(pair_sort_x, pair_sort_y,
+                                                   left, mid)
+    min_distance_right = recursive_minimum_distance(pair_sort_x, pair_sort_y,
+                                                    mid, right)
 
     min_distance = min(min_distance_left, min_distance_right)
 
@@ -55,7 +58,8 @@ def recursive_minimum_distance(pair_sort_x, pair_sort_y, left, right):
     # print(points_min_dist)
     points_min_dist.sort(key=sort_y)
     for i in range(1, len(points_min_dist)):
-        min_distance = min(min_distance, distance(points_min_dist[i], points_min_dist[i-1]))
+        min_distance = min(min_distance, distance(points_min_dist[i],
+                                                  points_min_dist[i-1]))
 
     return min_distance
 
