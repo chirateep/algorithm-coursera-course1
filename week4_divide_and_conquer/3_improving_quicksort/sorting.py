@@ -2,9 +2,29 @@
 import sys
 import random
 
+
 def partition3(a, l, r):
-    #write your code here
-    pass
+    # print(a)
+    x = a[l]
+    less = list()
+    equal = list()
+    more = list()
+
+    for i in range(l, r + 1):
+        if a[i] < x:
+            less.append(a[i])
+        elif a[i] == x:
+            equal.append(a[i])
+        elif a[i] > x:
+            more.append(a[i])
+
+    m1 = len(less) + l
+    m2 = m1 + len(equal) - 1
+    full = less + equal + more
+    a[l:r + 1] = full
+    # print(m1, m2)
+    return m1, m2
+
 
 def partition2(a, l, r):
     x = a[l]
@@ -17,15 +37,16 @@ def partition2(a, l, r):
     return j
 
 
-def randomized_quick_sort(a, l, r):
-    if l >= r:
+def randomized_quick_sort(a, left, r):
+    # print(a, l, r)
+    if left >= r:
         return
-    k = random.randint(l, r)
-    a[l], a[k] = a[k], a[l]
-    #use partition3
-    m = partition2(a, l, r)
-    randomized_quick_sort(a, l, m - 1);
-    randomized_quick_sort(a, m + 1, r);
+    k = random.randint(left, r)
+    a[left], a[k] = a[k], a[left]
+    # use partition3
+    m1, m2 = partition3(a, left, r)
+    randomized_quick_sort(a, left, m1 - 1)
+    randomized_quick_sort(a, m2 + 1, r)
 
 
 if __name__ == '__main__':
