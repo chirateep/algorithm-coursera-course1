@@ -3,30 +3,60 @@ import sys
 import math
 
 
-def fast_minimum_distance(x, y):
-    pair = list()
-    for i in range(len(x)):
-        pair.append((x[i], y[i]))
-    pair.sort()
-    left = min(x)
-    right = max(x)
+map_sort_y = dict()
 
-    min_distance = recursive_minimum_distance(pair, left, right)
+
+def sort_y(pair):
+    return pair[1]
+
+
+def fast_minimum_distance(x, y):
+    pair_sort_x = list()
+    pair_sort_y = list()
+    for i in range(len(x)):
+        pair_sort_x.append((x[i], y[i]))
+        pair_sort_y.append((x[i], y[i]))
+    pair_sort_x.sort()
+    pair_sort_y.sort(key=sort_y)
+
+    for i in range(len(y)):
+        map_sort_y[pair_sort_y[i]] = i
+
+    # print(pair_sort_x)
+    # print(pair_sort_y)
+
+    left = 0
+    right = len(pair_sort_x) - 1
+
+    min_distance = recursive_minimum_distance(pair_sort_x, pair_sort_y, left, right)
     return min_distance
 
 
-def recursive_minimum_distance(pair, left, right):
+def recursive_minimum_distance(pair_sort_x, pair_sort_y, left, right):
     min_distance = 0
-    if (right - left) <= 1:
-        
-        return distance(pair[left], pair[right])
+    if left == right:
+        return min_distance
+    if left + 1 == right:
+        return distance(pair_sort_x[left], pair_sort_x[right])
     mid = (left + right) // 2
-    min_distance_left = recursive_minimum_distance(pair, left, mid)
-    min_distance_right = recursive_minimum_distance(pair, mid, right)
+    min_distance_left = recursive_minimum_distance(pair_sort_x, pair_sort_y, left, mid)
+    min_distance_right = recursive_minimum_distance(pair_sort_x, pair_sort_y, mid, right)
 
-    print(min_distance_left)
-    print(min_distance_right)
     min_distance = min(min_distance_left, min_distance_right)
+
+    points_min_dist = list()
+    x_mid = pair_sort_x[mid][0]
+
+    for i in range(left, right):
+        if x_mid - min_distance <= pair_sort_x[i][0] <= x_mid + min_distance:
+            # index_point = map_sort_y[pair_sort_x[i]]
+            points_min_dist.append(pair_sort_x[i])
+
+    # print(points_min_dist)
+    points_min_dist.sort(key=sort_y)
+    for i in range(1, len(points_min_dist)):
+        min_distance = min(min_distance, distance(points_min_dist[i], points_min_dist[i-1]))
+
     return min_distance
 
 
