@@ -27,6 +27,7 @@ def largest_number(a):
         a.remove(max_val)
     return res
 
+
 if __name__ == '__main__':
     input = sys.stdin.read()
     data = input.split()

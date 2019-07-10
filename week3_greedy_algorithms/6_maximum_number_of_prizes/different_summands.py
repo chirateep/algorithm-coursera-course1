@@ -15,6 +15,7 @@ def optimal_summands(n):
         i += 1
     return summands
 
+
 if __name__ == '__main__':
     input = sys.stdin.read()
     n = int(input)

@@ -12,6 +12,7 @@ def max_dot_product(a, b):
         res += a[i] * b[i]
     return res
 
+
 if __name__ == '__main__':
     input = sys.stdin.read()
     data = list(map(int, input.split()))

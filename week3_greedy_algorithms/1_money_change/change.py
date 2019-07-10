@@ -19,6 +19,7 @@ def get_change(m):
                 break
     return total_coin
 
+
 if __name__ == '__main__':
     m = int(sys.stdin.read())
     print(get_change(m))
